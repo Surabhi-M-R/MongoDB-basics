@@ -1,0 +1,6 @@
+ show dbs
+ show databases
+ use students
+ show collections
+ db.data.drop()
+ db.dropDatabase()
