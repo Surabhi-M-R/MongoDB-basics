@@ -88,3 +88,10 @@ students> db.data.find().limit(2);
   }
 ]
 students> db.Data.find().limit(2);
+
+Finding data in collection
+ db.data.find().limit(2);
+ db.data.find({'name':'sush'});
+ db.data.findOne({ 'name': 'sush' });
+
+
