@@ -1,0 +1,90 @@
+ db.data.insertOne({'name':'sush',age:21,email:'sush@gmail.com'})
+ db.data.insertMany([{'name':'sush',age:21,email:'sush@gmail.com'},{'name':'sushma',age:22,email:'sushma@gmail.com'},{'name':'sushmitha',age:23,email:'sushmitha@gmail.com'}]);
+ db.data.find();
+note = if a field contains special character ,or spaces,or starts with a numeric digits, using quotes is necessary
+
+Ordered and Unordered inserts 
+ordered 
+ db.data.insertMany([{'name':'sush',age:21,email:'sush@gmail.com'},{_id: ObjectId('6888ce72d6b37ec5e4718dc4'),age:2,email:'sushm@gmail.com'},{'name':'sushmitha',age:23,email:'sushmitha@gmail.com'}]);
+OUTPUT:::
+Uncaught:
+MongoBulkWriteError: E11000 duplicate key error collection: students.data index: _id_ dup key: { _id: ObjectId('6888ce72d6b37ec5e4718dc4') }
+Result: BulkWriteResult {
+  insertedCount: 1,
+  matchedCount: 0,
+  modifiedCount: 0,
+  deletedCount: 0,
+  upsertedCount: 0,
+  upsertedIds: {},
+  insertedIds: { '0': ObjectId('6888d38ed6b37ec5e4718dc9') }
+}
+Write Errors: [
+  WriteError {
+    err: {
+      index: 1,
+      code: 11000,
+      errmsg: "E11000 duplicate key error collection: students.data index: _id_ dup key: { _id: ObjectId('6888ce72d6b37ec5e4718dc4') }",
+      errInfo: undefined,
+      op: {
+        _id: ObjectId('6888ce72d6b37ec5e4718dc4'),
+        age: 2,
+        email: 'sushm@gmail.com'
+      }
+    }
+  }
+]
+
+UNORDERED
+ db.data.insertMany([{'name':'sush',age:21,email:'sush@gmail.com'},{_id: ObjectId('6888ce72d6b37ec5e4718dc4'),age:2,email:'sushm@gmail.com'},{'name':'sushmitha',age:23,email:'sushmitha@gmail.com'}],{ordered:false});
+OUTPUT:::
+Uncaught:
+MongoBulkWriteError: E11000 duplicate key error collection: students.data index: _id_ dup key: { _id: ObjectId('6888ce72d6b37ec5e4718dc4') }
+Result: BulkWriteResult {
+  insertedCount: 2,
+  matchedCount: 0,
+  modifiedCount: 0,
+  deletedCount: 0,
+  upsertedCount: 0,
+  upsertedIds: {},
+  insertedIds: {
+    '0': ObjectId('6888d3f8d6b37ec5e4718dcd'),
+    '2': ObjectId('6888d3f8d6b37ec5e4718dce')
+  }
+}
+Write Errors: [
+  WriteError {
+    err: {
+      index: 1,
+      code: 11000,
+      errmsg: "E11000 duplicate key error collection: students.data index: _id_ dup key: { _id: ObjectId('6888ce72d6b37ec5e4718dc4') }",
+      errInfo: undefined,
+      op: {
+        _id: ObjectId('6888ce72d6b37ec5e4718dc4'),
+        age: 2,
+        email: 'sushm@gmail.com'
+      }
+    }
+  }
+]
+
+Case senstivity in MongoDB
+
+==>>colllection and field names within documents are case sensitive 
+ show collections
+data
+students> db.data.find().limit(2);
+[
+  {
+    _id: ObjectId('6888ce72d6b37ec5e4718dc4'),
+    name: 'sush',
+    age: 21,
+    email: 'sush@gmail.com'
+  },
+  {
+    _id: ObjectId('6888cedfd6b37ec5e4718dc5'),
+    name: 'sush',
+    age: 21,
+    email: 'sush@gmail.com'
+  }
+]
+students> db.Data.find().limit(2);
