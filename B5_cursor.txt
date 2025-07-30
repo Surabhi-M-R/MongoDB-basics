@@ -1,0 +1,5 @@
+ db.products.find({'price':{$nin:[200,450,700]}}).count()
+db.products.find({'price':{$nin:[200,450,700]}}).limit(5);
+ db.products.find({'price':{$nin:[200,450,700]}}).limit(5).skip(2);
+ db.products.find({ price: { $gt: 500 } }).sort({ rating: 1 }).limit(5)
+
