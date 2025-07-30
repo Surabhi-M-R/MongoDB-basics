@@ -1,0 +1,20 @@
+ db.products.find({price:{$exists:true}}).count();
+
+ db.products.find({prices:{$exists:true}}).count();
+ output==0
+
+  db.products.find({price:{$exists:true},price:{$gt:999}})
+
+  
+shop> db.products.find({price:{$type:'number'}}).count();
+o/p==5000
+
+shop> db.products.find({price:{$type:'string'}}).count();
+o/p==0
+
+shop> db.products.find({price:{$type:'bool'}}).count();
+0
+shop> db.products.find({price:{$type:8}}).count();
+0
+shop> db.products.find({name:{$type:2}}).count();
+5000
