@@ -1,0 +1,13 @@
+ db.products.find({},{name:1,price:1,_id:0});
+
+ db.products.find({},{description:0,rating:0});
+ db.products.find({},{description:0,rating:0,_id:0,in_stock:0});
+
+ NOTE:
+      db.products.find({},{description:0,rating:1,_id:0,in_stock:0});
+MongoServerError[Location31253]: Cannot do inclusion on field rating in exclusion projection
+
+ // note that projection should be in the second position
+ and 1 represents it should be included 
+ 0 represents it should not be included
+ 
