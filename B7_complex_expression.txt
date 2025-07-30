@@ -1,0 +1,2 @@
+ db.products.find({$expr:{$gt:['$price',999]}})
+db.products.find({$expr:{$gt:[{$multiply:['$in_stock','$rating']},'$price']}})
