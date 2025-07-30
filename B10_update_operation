@@ -1,0 +1,39 @@
+syntax: db.collectionName.updateOne(
+            {filter},
+            {$set:{exiting field:new value, new field:"new value",//},};
+
+EXAMPLE 1
+  db.products.find({_id: ObjectId('6889ad1b6d08b0cec2c91940')});
+[
+  {
+    _id: ObjectId('6889ad1b6d08b0cec2c91940'),
+    product_id: '0b41e2b5-6a5a-47fb-84b7-fdbaffbb89d3',
+    name: 'Democrat Sit',
+    description: 'Market she kitchen today task assume great good be task.',
+    price: 303.79,
+    category: 'Clothing',
+    in_stock: 475,
+    rating: 3.4
+  }
+]
+shop> db.products.updateOne({_id: ObjectId('6889ad1b6d08b0cec2c91940')},{$set:{'price':499}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+shop> db.products.find({_id: ObjectId('6889ad1b6d08b0cec2c91940')});
+[
+  {
+    _id: ObjectId('6889ad1b6d08b0cec2c91940'),
+    product_id: '0b41e2b5-6a5a-47fb-84b7-fdbaffbb89d3',
+    name: 'Democrat Sit',
+    description: 'Market she kitchen today task assume great good be task.',
+    price: 499,
+    category: 'Clothing',
+    in_stock: 475,
+    rating: 3.4
+  }
+]
