@@ -1,0 +1,4 @@
+this command is to import file from folder to data base 
+mongoimport --db shop --collection products --file "C:\Users\Surabhi M R\Downloads\shop\product.json" --jsonArray
+this command is to export from database to required folder
+mongoexport --db shop --collection products --out pro2.json --jsonArray
