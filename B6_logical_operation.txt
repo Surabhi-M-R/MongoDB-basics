@@ -1,0 +1,24 @@
+ db.products.find({
+...   $and: [
+...     { price: { $gt: 500 } },
+...     { category: 'Beauty' }
+...   ]
+... });
+
+ db.products.find({$and :[{'price':{$gt:5000}},{'category':'Beauty'}]});
+
+
+  db.products.find({$or :[{'price':{$gt:5000}},{'category':'Beauty'}]});
+
+ db.products.find({$or :[{'price':{$gt:500}},{'category':'Beauty'}]});
+
+ db.products.find({$or :[{'price':{$gt:500}},{'category':'Beauty'}]});
+
+ db.products.find({'price':{$not:{$eq:468.66}}}).count()
+
+note::
+
+shop> db.products.find({'price':{$ne:468.66}}).count()
+5000 --> getting the same output
+shop> db.products.find({'price':{$not:{$eq:468.66}}}).count()
+5000
