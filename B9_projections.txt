@@ -10,4 +10,6 @@ MongoServerError[Location31253]: Cannot do inclusion on field rating in exclusio
  // note that projection should be in the second position
  and 1 represents it should be included 
  0 represents it should not be included
+
+ db.comments.find({'contact.email':{$all:['michaelmartin@ford-walter.com','michaelmartin@ford-walter.com']}})
  
