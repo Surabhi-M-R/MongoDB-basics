@@ -1,0 +1,19 @@
+Syntax : db.<collection name>.find({'field name':{$operator:value}});
+
+
+shop>db.products.find({'price':{$eq:400}}).count()
+0
+shop> db.products.find({'price':{$ne:400}}).count()
+5000
+shop> db.products.find({'price':{$gt:400}}).count()
+3003
+shop> db.products.find({'price':{$lt:400}}).count()
+1997
+shop> db.products.find({'price':{$gte:400}}).count()
+3003
+shop> db.products.find({'price':{$lte:400}}).count()
+1997
+shop> db.products.find({'price':{$in:[200,450,700]}}).count()
+0
+shop> db.products.find({'price':{$nin:[200,450,700]}}).count()
+5000
