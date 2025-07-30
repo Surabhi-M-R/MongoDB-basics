@@ -18,3 +18,5 @@ shop> db.products.find({price:{$type:8}}).count();
 0
 shop> db.products.find({name:{$type:2}}).count();
 5000
+
+shop> db.products.find({description:{$size:1}});
