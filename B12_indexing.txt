@@ -1,0 +1,82 @@
+ db.products.find({price:{$gt:999}}).explain('executionStats');
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'shop.products',
+    parsedQuery: { price: { '$gt': 999 } },
+    indexFilterSet: false,
+    queryHash: '8E1D451A',
+    planCacheShapeHash: '8E1D451A',
+    planCacheKey: 'D910EC32',
+    optimizationTimeMillis: 0,
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    prunedSimilarIndexes: false,
+    winningPlan: {
+      isCached: false,
+      stage: 'COLLSCAN',
+      filter: { price: { '$gt': 999 } },
+      direction: 'forward'
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 2,
+    executionTimeMillis: 4,
+    totalKeysExamined: 0,
+    totalDocsExamined: 5000,  // it has searched somewhere around 5000 documents for returning 2 data 
+    executionStages: {
+      isCached: false,
+      stage: 'COLLSCAN',
+      filter: { price: { '$gt': 999 } },
+      nReturned: 2,
+      executionTimeMillisEstimate: 0,
+      works: 5001,
+      advanced: 2,
+      needTime: 4998,
+      needYield: 0,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1,
+      direction: 'forward',
+      docsExamined: 5000
+    }
+  },
+  queryShapeHash: '7C50EDB71259F55C2D1DA6AAB373F82B1C42674419E14C30B3A86C50298CB436',
+  command: {
+    find: 'products',
+    filter: { price: { '$gt': 999 } },
+    '$db': 'shop'
+  },
+  serverInfo: {
+    host: 'Surabhi',
+    port: 27017,
+    version: '8.0.11',
+    gitVersion: 'bed99f699da6cb2b74262aa6d473446c41476643'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1
+}
+
+
+
+// managing index
+    db.products.createIndex({'name':1});
+
+   db.products.getIndexes();
+
+   db.products.dropIndex({'name':1});
+
