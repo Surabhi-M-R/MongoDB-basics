@@ -1,0 +1,45 @@
+db.products.aggregate([{$match:{name:'Class Pull'}}]);
+db.products.aggregate([{$match:{price:{$gt:999}}}]);
+ db.products.aggregate([{$group:{_id:'$category',totalproducts:{$sum:1}}}]);
+db.products.aggregate([{$match:{category:'Books'}}]);
+ db.products.aggregate([{$group:{_id:'$category',totalPrice:{$sum:'$price'}}}]);
+ db.products.aggregate([{$match:{price:{$gt:999}}},{$group:{_id:"$category",totalprice:{$sum:"$price"},},},{$sort:{totalprice:1}}])
+---> o/p [
+  { _id: 'Books', totalprice: 999.26 },
+  { _id: 'Electronics', totalprice: 999.95 }
+]
+
+db.products.aggregate([{$match:{price:{$gt:999}}},{$group:{_id:"$category",totalprice:{$sum:"$price"},},},{$sort:{totalprice:-1}}])
+--->o/p
+[
+  { _id: 'Electronics', totalprice: 999.95 },
+  { _id: 'Books', totalprice: 999.26 }
+]
+db.products.aggregate([{$project:{'price':1,"_id":0}}])
+--->o/p
+[
+  { price: 444.95 }, { price: 599 },
+  { price: 599 },    { price: 523.59 },
+  { price: 477.92 }, { price: 91.94 },
+  { price: 952.27 }, { price: 26.8 },
+  { price: 760.12 }, { price: 186.56 },
+  { price: 112.93 }, { price: 249.86 },
+  { price: 213.39 }, { price: 398.25 },
+  { price: 593.84 }, { price: 453.22 },
+  { price: 827.34 }, { price: 663.94 },
+  { price: 586.69 }, { price: 476.41 }
+]
+ db.products.aggregate([{$project:{'price':1}}])
+
+ db.products.aggregate([{$project:{'price':1, discountedPrice:{$multiply:['$price',0.8]}}}])
+[
+  {
+    _id: ObjectId('6889ad1b6d08b0cec2c9193f'),
+    price: 444.95,
+    discountedPrice: 355.96000000000004
+  },
+  {
+    _id: ObjectId('6889ad1b6d08b0cec2c91940'),
+    price: 599,
+    discountedPrice: 479.20000000000005
+  }
