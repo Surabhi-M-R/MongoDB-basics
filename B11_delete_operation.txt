@@ -1,0 +1,40 @@
+// this  query is to delelte whole document
+ 
+ db.comments.deleteOne({_id: ObjectId('688a436a9e7bf4da1f283bda')});
+{ acknowledged: true, deletedCount: 1 }
+shop> db.comments.find({_id: ObjectId('688a436a9e7bf4da1f283bda')})
+// this document is to delete particular field in the document
+db.comments.updateOne({_id: ObjectId('688a436a9e7bf4da1f283bdf')},{$unset:{user:1}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+shop> db.comments.find({_id: ObjectId('688a436a9e7bf4da1f283bdf')})
+[
+  {
+    _id: ObjectId('688a436a9e7bf4da1f283bdf'),
+    comment_id: '0ad40415-04c1-4982-99ea-d9264745dd9e',
+    comment: 'Among clearly word. Guess writer can boy room. Film tax rock. Idea foreign increase between training.',
+    likes: 591,
+    timestamp: '2025-07-04 02:02:36',
+    replies: [
+      {
+        reply_id: 'f9ea2c64-cc41-4e7c-9741-d609564ae909',
+        replier: {
+          username: 'david17',
+          contact: { email: 'turnerjessica@gmail.com' }
+        },
+        reply_text: 'Phone heart window police.',
+        timestamp: '2025-01-26 13:37:25'
+      }
+    ]
+// it delets the whole document containing which follows the condition
+
+db.commenst.deleteMany({likes:{$gt:500}});
+{ acknowledged: true, deletedCount: 0 }
+shop>  db.comments.deleteMany({likes:{$gt:500}});
+{ acknowledged: true, deletedCount: 57 }
+shop> db.comments.find({likes:{$gt:500}});
