@@ -37,3 +37,44 @@ shop> db.products.find({_id: ObjectId('6889ad1b6d08b0cec2c91940')});
     rating: 3.4
   }
 ]
+
+---> renaming the fields 
+db.products.updateMany({category:'Clothing'},{$rename:{'rating':'opinion'}});
+
+---> adding new field to the document
+ db.products.updateOne({_id: ObjectId('6889ad1b6d08b0cec2c91952')},{$set:{'returns':50}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+shop> db.products.find({_id: ObjectId('6889ad1b6d08b0cec2c91952')})
+[
+  {
+    _id: ObjectId('6889ad1b6d08b0cec2c91952'),
+    product_id: 'a131e26a-9552-49ab-9c35-554369258751',
+    name: 'Describe Attorney',
+    description: 'Show hand throughout present behavior personal ability body serious year worry upon simple.',
+    price: 476.41,
+    category: 'Toys',
+    in_stock: 396,
+    rating: 1.6,
+    returns: 50
+  }
+]
+
+// this is to remove that field from the document 
+shop> db.products.updateOne({_id: ObjectId('6889ad1b6d08b0cec2c91952')},{$unset:{'returns':50}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+// update in embedded elements
+
+ db.comments.updateOne({_id: ObjectId('688a436a9e7bf4da1f283bda')},{$push:{replies:{replier:{insta_id:'joshua_2323'}}}});
